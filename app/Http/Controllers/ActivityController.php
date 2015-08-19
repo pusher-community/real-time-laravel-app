@@ -44,7 +44,7 @@ class ActivityController extends Controller
     public function postStatusUpdate(Request $request)
     {
         $activity = [
-            'text' => $request->input('status_text'),
+            'text' => e($request->input('status_text')),
             'username' => $this->user->getNickname(),
             'avatar' => $this->user->getAvatar(),
             'id' => str_random()
