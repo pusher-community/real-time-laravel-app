@@ -4,50 +4,9 @@
     <title>Real-Time Laravel with Pusher</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="http://d3dhju7igb20wy.cloudfront.net/assets/0-4-0/all-the-things.css" />
-    <style>
-        .chat-app {
-            width: 400px;
-            margin: auto;
-            margin-top: 50px;
-        }
-
-        #status_form {
-            margin-bottom: 15px;
-        }
-
-        #status_text {
-            width: 100%;
-            padding-bottom: 10px;
-            margin-top: 15px;
-        }
-
-        #activities {
-            height: 450px;
-            max-height: 450px;
-            overflow: auto;
-        }
-
-        .chat-app .message:first-child {
-            margin-top: 15px;
-        }
-
-        .like-heart {
-            color: red;
-            cursor: pointer;
-        }
-
-        .message-data {
-            float: right;
-            margin-top: 9px !important;
-        }
-
-        .activity-text {
-            float: left;
-            width: 275px;
-            margin-top: 9px !important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="https://pusher-community.github.io/real-time-laravel/assets/laravel_app/activity-stream-tweaks.css" />
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//js.pusher.com/3.0/pusher.min.js"></script>
@@ -66,23 +25,36 @@
         };
     </script>
 </head>
-<body class="blue-gradient-background">
+<body>
 
-<div class="chat-app light-grey-blue-background">
-    <form class="container" id="status_form" action="/activities/status-update" method="post">
-        <div class="action-bar">
-            <input id="status_text" name="status_text" class="input-message col-xs-9" placeholder="What's your status?" />
-        </div>
-    </form>
-
-    <div class="time-divide">
-        <span class="date">
-          Today
-        </span>
+<div class="stripe no-padding-bottom numbered-stripe">
+    <div class="fixed wrapper">
+        <ol class="strong" start="2">
+            <li>
+                <div class="hexagon"></div>
+                <h2><b>Real-Time Activity Streams</b> <small>A stream of application consciousness.</small></h2>
+            </li>
+        </ol>
     </div>
-
-    <div id="activities"></div>
 </div>
+
+<section class="blue-gradient-background">
+    <div class="chat-app light-grey-blue-background">
+        <form id="status_form" action="/activities/status-update" method="post">
+            <div class="action-bar">
+                <input id="status_text" name="status_text" class="input-message col-xs-9" placeholder="What's your status?" />
+            </div>
+        </form>
+
+        <div class="time-divide">
+            <span class="date">
+              Today
+            </span>
+        </div>
+
+        <div id="activities"></div>
+    </div>
+</section>
 
 <script id="activity_template" type="text/template">
     <div class="message activity">

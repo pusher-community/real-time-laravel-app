@@ -2,14 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ActivityEvent;
-use App\Events\ActivityLikedEvent;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
-
 use Illuminate\Support\Facades\Session;
 
 class ActivityController extends Controller
@@ -33,7 +27,12 @@ class ActivityController extends Controller
             return redirect('auth/github?redirect=/activities');
         }
 
-        $activity = new ActivityEvent($this->user, $this->user->getNickname() . ' visited the Activities page');
+        $activity = [
+            'text' => $this->user->getNickname() . ' visited the Activities page',
+            'username' => $this->user->getNickname(),
+            'avatar' => $this->user->getAvatar(),
+            'id' => str_random()
+        ];
         $this->pusher->trigger('activities', 'user-visit', $activity);
         return view('activities');
     }
@@ -44,7 +43,12 @@ class ActivityController extends Controller
      */
     public function postStatusUpdate(Request $request)
     {
-        $activity = new ActivityEvent( $this->user, $request->input('status_text') );
+        $activity = [
+            'text' => $request->input('status_text'),
+            'username' => $this->user->getNickname(),
+            'avatar' => $this->user->getAvatar(),
+            'id' => str_random()
+        ];
         $this->pusher->trigger('activities', 'new-status-update', $activity);
     }
 
@@ -54,7 +58,13 @@ class ActivityController extends Controller
      */
     public function postLike($id)
     {
-        $activity = new ActivityLikedEvent( $this->user, $this->user->getNickname() . ' liked a status update', $id );
+        $activity = [
+            'text' => $this->user->getNickname() . ' liked a status update',
+            'username' => $this->user->getNickname(),
+            'avatar' => $this->user->getAvatar(),
+            'id' => str_random(),
+            'likedActivityId' => $id
+        ];
         $this->pusher->trigger('activities', 'status-update-liked', $activity);
     }
 }
