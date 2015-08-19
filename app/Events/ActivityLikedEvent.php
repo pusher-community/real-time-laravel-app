@@ -2,10 +2,6 @@
 
 namespace App\Events;
 
-use App\Events\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-
 class ActivityLikedEvent extends ActivityEvent
 {
     public $likedActivityId;
@@ -15,9 +11,9 @@ class ActivityLikedEvent extends ActivityEvent
      *
      * @return void
      */
-    public function __construct($text, $likedActivityId)
+    public function __construct($user, $text, $likedActivityId)
     {
-        parent::__construct($text);
+        parent::__construct($user, $text);
 
         $this->likedActivityId = $likedActivityId;
     }

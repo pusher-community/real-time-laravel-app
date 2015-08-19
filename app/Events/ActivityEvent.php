@@ -4,7 +4,6 @@ namespace App\Events;
 
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class ActivityEvent extends Event
 {
@@ -12,16 +11,21 @@ class ActivityEvent extends Event
 
     public $id;
     public $text;
+    public $username;
+    public $avatar;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($text)
+    public function __construct($user, $text)
     {
         $this->id = str_random();
         $this->text = e($text);
+
+        $this->username = $user->getNickname();
+        $this->avatar = $user->getAvatar();
     }
 
     /**

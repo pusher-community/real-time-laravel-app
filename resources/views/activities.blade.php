@@ -167,9 +167,9 @@
     function addActivity(type, data) {
         var activityEl = createActivityEl();
         activityEl.addClass(type + '-activity');
-        activityEl.find('.activity-text').text(data.text);
+        activityEl.find('.activity-text').html(data.text);
         activityEl.attr('data-activity-id', data.id);
-        activityEl.find('.avatar img').attr('src', 'https://robohash.org/' + data.id);
+        activityEl.find('.avatar img').attr('src', data.avatar);
 
         $('#activities').prepend(activityEl);
     }

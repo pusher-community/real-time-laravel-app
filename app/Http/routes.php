@@ -45,5 +45,10 @@ get('/broadcast', function() {
     return view('welcome');
 });
 
+
+
 Route::controller('notifications', 'NotificationController');
 Route::controller('activities', 'ActivityController');
+
+Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
