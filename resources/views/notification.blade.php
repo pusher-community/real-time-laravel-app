@@ -4,6 +4,9 @@
     <title>Real-Time Laravel with Pusher</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://d3dhju7igb20wy.cloudfront.net/assets/0-4-0/all-the-things.css" />
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="//js.pusher.com/3.0/pusher.min.js"></script>
@@ -26,10 +29,25 @@
 </head>
 <body>
 
-<form id="notify_form" action="/notifications/notify" method="post">
-    <label for="notify_text">What's the notification?</label>
-    <input type="text" id="notify_text" name="notify_text" minlength="3" maxlength="50" required />
-</form>
+<div class="stripe no-padding-bottom numbered-stripe">
+    <div class="fixed wrapper">
+        <ol class="strong" start="1">
+            <li>
+                <div class="hexagon"></div>
+                <h2><b>Real-Time Notifications</b> <small>Let users know what's happening.</small></h2>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<section class="blue-gradient-background splash">
+    <div class="container center-all-container">
+        <form id="notify_form" action="/notifications/notify" method="post">
+            <input type="text" id="notify_text" name="notify_text"
+                   placeholder="What's the notification?" minlength="3" maxlength="50" required />
+        </form>
+    </div>
+</section>
 
 <script>
     // set up form submission handling
@@ -60,7 +78,7 @@
     // Use toastr to show the notification
     function showNotification(data) {
         var text = data.text;
-        toastr.success(text);
+        toastr.success(text, null, {"positionClass": "toast-bottom-left"});
     }
 
     $(notifyInit);
